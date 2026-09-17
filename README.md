@@ -1,108 +1,259 @@
-# EX - 6 Implementation Of Identity Management (Amazon IAM) For Your Team
+# IAM
 
-## NAME: Dodla Susmitha
-## REG. NO: 212224110016
----
+## EXPERIMENT 06
+
+# NAME : DODLA SUSMITHA
+
+# REGISTER NUMBER : 212224110016
+
+#DATE: 03/09/2026
+
+## EXPERIMENT NO. 6 Login into AWS and Implement Identity Management Using Amazon IAM
 
 ## Aim
 
-To implement identity and access management (IAM) in AWS to securely control access to resources by creating and managing IAM users, groups, roles, and policies for team collaboration.
+To create and configure IAM users and groups in AWS, assign permissions using IAM policies, enable console access, and verify role-based access to Amazon S3.
 
----
+## Requirements
 
-## Algorithm
+• AWS Account
 
-1. Sign in to the AWS Management Console.
-2. Navigate to the IAM service.
-3. Create IAM groups with defined policies (e.g., Admin, Developer).
-4. Create IAM users and assign them to appropriate groups.
-5. Create IAM roles if cross-account or service-based access is needed.
-6. Attach permissions using managed or custom policies.
-7. Enable MFA (Multi-Factor Authentication) for users.
-8. Monitor access using IAM Access Analyzer and CloudTrail.
+• Internet connection
 
----
+• Web browser
 
-## Procedure
+• Amazon S3 bucket
 
-### 1. Access IAM
+Procedure
 
-- Go to *AWS Console* → *Services* → *IAM*.
+## Step 1: Login to AWS Management Console
 
-### 2. Create IAM Groups
+Open a web browser.
 
-- Click *Groups* → *Create New Group*.
-- Name the group (e.g., Admins, Developers).
-- Attach predefined or custom policies (e.g., AmazonEC2FullAccess).
+Go to the AWS Management Console.
 
-### 3. Create IAM Users
+Sign in using the AWS account credentials.
 
-- Click *Users* → *Add Users*.
-- Enter usernames and choose *Programmatic access* and/or *AWS Management Console access*.
-- Assign users to the appropriate group.
+Search for IAM using the AWS search bar.
 
-### 4. Create IAM Roles (if needed)
+Open IAM (Identity and Access Management).
 
-- Go to *Roles* → *Create Role*.
-- Select use case (AWS service, another AWS account).
-- Attach necessary permissions.
+<img width="1535" height="954" alt="Screenshot 2026-09-17 211016" src="https://github.com/user-attachments/assets/07ac6015-a7fe-4f07-aa8c-bea450e77d29" />
 
-### 5. Apply Policies
+## Step 2: Create an IAM Group
 
-- Use AWS managed policies or create custom JSON-based policies.
-- Assign them to users, groups, or roles.
+In the IAM dashboard, select User groups from the left-side menu.
 
-### 6. Enable MFA
+Click Create group.
 
-- For each user, go to *Security credentials*.
-- Click *Manage MFA* → Choose *Virtual MFA device* (e.g., Google Authenticator).
+Enter the group name:
 
-### 7. Monitor IAM Usage
+cloudSecurity_2026
 
-- Use *IAM Access Analyzer* to detect unused permissions.
-- Use *CloudTrail* for auditing user activity.
+Do not add users at this stage if the user will be created separately.
 
----
+Click Create user group.
 
-### Outcome
+The group cloudSecurity_2026 is now created.
 
-## 1.IAM Group Creation
+<img width="1535" height="959" alt="Screenshot 2026-09-17 211122" src="https://github.com/user-attachments/assets/6f091b0b-59a4-4e94-8598-c3acfa85fe83" />
 
-<img width="1600" height="738" alt="WhatsApp Image 2026-09-12 at 4 01 50 PM" src="https://github.com/user-attachments/assets/5a63cf19-c0b8-4996-9850-3da51d949b2c" />
+## Step 3: Attach an IAM Policy to the Group
 
-## 2.Attach an IAM Policy to the group
+Open the cloudSecurity_2026 group.
 
-<img width="1237" height="555" alt="WhatsApp Image 2026-09-12 at 4 06 09 PM" src="https://github.com/user-attachments/assets/5e7bd31b-baa2-4741-99a7-6301e36280d2" />
+Select the Permissions tab.
 
-## 3.Create an IAM User
+Click Add permissions.
 
-<img width="1047" height="571" alt="WhatsApp Image 2026-09-12 at 4 25 20 PM" src="https://github.com/user-attachments/assets/2f09a65c-c8c1-45e9-877a-321b7044123a" />
+Select Attach policies directly.
+
+Search for:
+
+AmazonS3ReadOnlyAccess
+
+Select the checkbox for AmazonS3ReadOnlyAccess.
+
+Click Next and then Add permissions.
+
+The group now has read-only access to Amazon S3.
+
+<img width="1534" height="959" alt="Screenshot 2026-09-17 211328" src="https://github.com/user-attachments/assets/9fe05fd2-03e5-4bf7-9b4d-0b7fda1dbde4" />
+
+## Step 4: Create an IAM User
+
+From the IAM navigation menu, select Users.
+
+Click Create user.
+
+Enter the username:
+
+student01
+
+Click Next.
+
+<img width="1534" height="959" alt="Screenshot 2026-09-17 211459" src="https://github.com/user-attachments/assets/53cb3aa4-9c4c-4d61-875d-f735a6261141" />
+
+## Step 5: Add the User to the IAM Group
+
+On the Permissions page, select Add user to group.
+
+Select: cloudSecurity_2026
+
+Click Next.
+
+Review the configuration.
+
+Click Create user.
+
+The user is now a member of the cloudSecurity_2026 group.
+
+<img width="1535" height="958" alt="Screenshot 2026-09-17 211657" src="https://github.com/user-attachments/assets/3326a6a5-5219-43ed-869b-5d0b47c20dde" />
+
+## Step 6: Verify User Permissions
+
+Open IAM → Users.
+
+Click student01.
+
+Open the Permissions tab.
+
+Verify that the following policy is displayed:
+
+AmazonS3ReadOnlyAccess
+
+<img width="1535" height="959" alt="Screenshot 2026-09-17 211801" src="https://github.com/user-attachments/assets/b7f9c831-4d95-434c-9232-56d7e7f12e2e" />
+
+Check the Attached via column.
+
+It should indicate that the policy is attached through:
+
+Group: cloudSecurity_2026
+
+This demonstrates:
+
+student01
+
+↓
+
+cloudSecurity_2026
+
+↓
+
+AmazonS3ReadOnlyAccess
+
+↓
+
+Amazon S3 Read-only Access
+
+Step 7: Enable Console Access
+
+Initially, console access for student01 may be disabled.
+
+Open IAM → Users → student01.
+
+Select Security credentials.
+
+Locate Console access / AWS Management Console access.
+
+Enable console access.
+
+Create a console password for student01.
+
+Complete the configuration.
+
+Note: Do not share the password with other users.
+
+<img width="1535" height="958" alt="Screenshot 2026-09-17 211905" src="https://github.com/user-attachments/assets/b8ca0bce-91bf-4cf4-b9f2-6e6f2c1f145e" />
+
+## Step 8: Obtain the AWS Account
+
+The IAM user login requires the AWS account ID.
+
+Your AWS account ID is a 12-digit number.
+
+It can be found in the AWS account information.
+
+For the demonstration account used in this experiment, the account ID was:
+
+360416501079
+
+Students should use their own AWS account ID when performing the experiment.
+
+<img width="1531" height="959" alt="Screenshot 2026-09-17 211922" src="https://github.com/user-attachments/assets/291e99ea-857f-4bf7-b9c4-66a90342b33d" />
+
+## Step 9: Login as the IAM User
+
+Sign out from the current AWS administrator/root session.
+
+Open a new browser window or Incognito/Private window.
+
+Open the AWS sign-in page.
+
+Select IAM user login.
+
+Enter the AWS account ID.
+
+Enter the IAM username:
+
+student01
+
+Enter the password created in Step 7.
+
+Click Sign in.
+
+The AWS Management Console should now open under the IAM user student01.
 
 
 
-## 4.Add The user to the IAM Group
 
-<img width="1252" height="590" alt="WhatsApp Image 2026-09-12 at 4 10 48 PM" src="https://github.com/user-attachments/assets/f963ea0e-e9ad-4e96-a179-cd9ae67eca44" />
+## Step 10: Verify Amazon S3 Access
+
+After logging in as student01, search for S3.
+
+Open Amazon S3.
+
+Select General purpose buckets.
+
+Verify that the previously created S3 bucket is visible.
+
+Open the bucket.
+
+Verify that the user can view the bucket and its objects.
+
+This confirms that the IAM policy is providing S3 read access.
+
+## Step 11: Verify Least-Privilege Access
+
+The user student01 has been assigned:
+
+AmazonS3ReadOnlyAccess
+
+Therefore, the user should have read access but should not have permission to perform S3 write/delete operations.
+
+For testing:
+
+Open the S3 bucket as student01.
+
+Observe the available operations.
+
+Do not delete any existing object.
+
+If you test an upload operation, do not use an important file.
+
+The actual permission check occurs when AWS attempts the S3 operation.
+
+A read-only user should receive an Access Denied response for unauthorized write/delete operations.
+
+Important: The S3 console may display an Upload button even when the user does not have permission to complete the upload. The presence of the button alone does not prove that upload permission exists.
 
 
-## 5.Verify user Permissions
-
-<img width="1252" height="615" alt="WhatsApp Image 2026-09-12 at 4 20 25 PM" src="https://github.com/user-attachments/assets/9392a40c-fa22-48f4-8767-77cc2cc3fd8c" />
 
 
-## 6.Verify Least-Privilege Access
+Expected Result
 
-<img width="1232" height="552" alt="WhatsApp Image 2026-09-12 at 4 15 24 PM" src="https://github.com/user-attachments/assets/76c0e067-f207-456f-840d-dbedb38d4b9a" />
+The IAM group cloudSecurity_2026 is successfully created and assigned the AmazonS3ReadOnlyAccess policy. The IAM user student01 is successfully created, added to the group, and provided with AWS Management Console access. The user can log in to AWS and access the assigned S3 resources according to the permissions inherited from the group.
 
+Result
 
-<img width="1272" height="647" alt="WhatsApp Image 2026-09-12 at 4 17 05 PM" src="https://github.com/user-attachments/assets/33a4bcee-b0ee-43b2-9339-7ccb8dd75b77" />
-
-
-
-
-
----
-
-## Result
-
-Successfully implemented identity and access management using Amazon IAM for secure team collaboration and controlled access to AWS resources.
+Thus, Identity and Access Management (IAM) was successfully implemented in AWS by creating an IAM group, assigning an S3 read-only policy, creating an IAM user, ena
